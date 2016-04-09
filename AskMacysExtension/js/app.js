@@ -77,6 +77,7 @@ angular.module("myApp", [])
     function setImagesURLs(info) {
       $scope.$apply(function(){
         $scope.links.array = info;
+        chrome.browserAction.setBadgeText({text: "10+"});
       });
 
         function verifyImage(){
@@ -129,4 +130,3 @@ angular.module("myApp", [])
     }
 
   });
-
