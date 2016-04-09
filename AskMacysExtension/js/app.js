@@ -2,7 +2,8 @@ angular.module("myApp", [])
   //main controller
   .controller("myController", function($scope) {
     $scope.links = {array: {}};
-        $scope.searchTerms = [
+    $scope.macyLinks = {array: {}};
+    $scope.searchTerms = [
             'dress',
             'shirt',
             'jacket',
@@ -81,58 +82,66 @@ angular.module("myApp", [])
       $scope.$apply(function(){
         $scope.links.array = info;
         chrome.browserAction.setBadgeText({text: "10+"});
+        while($scope.links.array.length > 0){
+          var clarifaiResults = verifyImage();
+          if(!clarifaiResults){
+            var url = createSearchUrl(clarifaiResults);
+          }
+        }
       });
 
-        function verifyImage(){
-            //get first element of queue.
-            var url = $scope.links.array.shift();
+    function verifyImage(){
+        //get first element of queue.
+        var url = $scope.links.array.shift();
 
-            var request = new XMLHttpRequest();
-            request.open('GET', $scope.endpointTag + url, false);
-            request.setRequestHeader("Authorization", "Bearer " + $scope.CLARIFAI_ACCESS_TOKEN);
-            request.send(null);
+        var request = new XMLHttpRequest();
+        request.open('GET', $scope.endpointTag + url, false);
+        request.setRequestHeader("Authorization", "Bearer " + $scope.CLARIFAI_ACCESS_TOKEN);
+        request.send(null);
 
-            if (request.status === 200) {
-                //console.log(request.responseText);
-                var response = JSON.parse(request.responseText);
-                //array of tag strings
-                var tags = response['results'][0]['result']['tag']['classes'];
+        if (request.status === 200) {
+            //console.log(request.responseText);
+            var response = JSON.parse(request.responseText);
+            //array of tag strings
+            var tags = response['results'][0]['result']['tag']['classes'];
 
-                var gender = 'woman'; //temp
-                var adjective = null;
-                var searchTerm = null;
-                var color = getColor(request, url);
+            var gender = 'woman'; //temp
+            var adjective = null;
+            var searchTerm = null;
+            var color = getColor(request, url);
 
-                for(var i=0;i < tags.length; i++){
-                    var tag = tags[i].toLowerCase();
-                    //check for search term
-                    if($scope.searchTerms.indexOf(tag) != -1){
-                        if(searchTerm == null) {
-                            searchTerm = tag;
-                        }
+            for(var i=0;i < tags.length; i++){
+                var tag = tags[i].toLowerCase();
+                //check for search term
+                if($scope.searchTerms.indexOf(tag) != -1){
+                    if(searchTerm == null) {
+                        searchTerm = tag;
                     }
-                    //check for adjective
-                    if($scope.adjectives.indexOf(tag) != -1){
-                        if(adjective == null){
-                            adjective = tag;
-                        }
+                }
+                //check for adjective
+                if($scope.adjectives.indexOf(tag) != -1){
+                    if(adjective == null){
+                        adjective = tag;
                     }
-
                 }
 
                 if(searchTerm == null){
                     return false;
                 }
 
-                return {'searchTerm': searchTerm, 'adjective': adjective, 'color' : color};
-            }
-            else{
+            if(adjective == null && searchTerm == null){
                 return false;
             }
 
-            //return object of associations or false
+            return {'searchTerm': searchTerm, 'adjective': adjective, 'color' : color};
+        }
+        else{
+            return false;
         }
 
+        //return object of associations or false
+    }
+}
         function getColor(request,  url) {
             request.open('GET', $scope.endpointColor + url, false);
             request.setRequestHeader("Authorization", "Bearer " + $scope.CLARIFAI_ACCESS_TOKEN);
@@ -174,7 +183,7 @@ angular.module("myApp", [])
             url: searchURL,
             complete: function(data) {
               //console.log(data.responseText);
-              //console.log($(data.responseText).find(".thumbnailImage").text())
+              //$scope.macyLinks.array.push(imageUrl);
             }
           });
         }
