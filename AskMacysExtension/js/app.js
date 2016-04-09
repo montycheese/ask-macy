@@ -81,10 +81,6 @@ angular.module("myApp", [])
       });
 
         function verifyImage(){
-
-
-
-
             var endpoint = 'https://api.clarifai.com/v1/tag/?url=';
             //for(var i=0; i < $scope.links.array.length; i++){
             //    var url = $scope.links.array[i];
@@ -103,30 +99,46 @@ angular.module("myApp", [])
                 //array of tag strings
                 var tags = response['result']['tag']['classes'];
 
-                var gender = 'woman';//temp
+                var gender = 'woman'; //temp
                 var adjective = null;
                 var color = null;
                 var searchTerm = null;
 
                 for(var i=0;i < tags.length; i++){
                     var tag = tags[i];
+                    //check for search term
                     if(tag in $scope.searchTerms){
-                        searchTerm = tag;
+                        if(searchTerm == null) {
+                            searchTerm = tag;
+                        }
                     }
+                    //check for adjective
+                    if(tag in $scope.adjectives){
+                        if(adjective == null){
+                            adjective = tag;
+                        }
+                    }
+                    //TODO check for color
+
                 }
+                
+                if(gender == null && adjective == null && color == null && searchTerm == null){
+                    return false;
+                }
+
+                return {'searchTerm': searchTerm, 'adjective': adjective, 'color' : color};
             }
             else{
                 return false;
             }
 
-            //return array of tags or false
+            //return object of associations or false
         }
 
         function generateSearch(){
 
         }
       document.getElementById("header").innerHTML = "Suggested Macy's clothing items:";
-      document.getElementsByClassName("buttonDiv")[0].style.visibility="visible";
     }
 
   });
