@@ -12,18 +12,18 @@
   <body ng-controller="myController">
     <h4 id="header"> Webpage is still loading... </h4>
     <div>
-      <ul class="list" ng-repeat="image in links.array">
+      <ul class="list" ng-repeat="image in macyLinks.array">
         <li>
           <hr>
           <div class="listcontent" ng-controller="myController">
             <div class="imageContainer">
-              <img id="sourceImage" src={{image.link}} height="300" width="300"><br>
+              <img id="sourceImage" src={{image.imgUrl}} height="300" width="300"><br>
+              <a id="imageLink" href={{image.pageUrl}} target='_newtab'>{{image.pageUrl}}</a></br>
             </div>
             <div class="imageContainer">
-              <img id="sourceImage" src={{image.link}} height="300" width="300"><br>
+              <img id="sourceImage" src={{image.imgUrl}} height="300" width="300"><br>
+              <a id="imageLink" href={{image.pageUrl}} target='_newtab'>{{image.pageUrl}}</a></br>
             </div>
-            <a id="imageLink" href={{image.link}} target='_newtab'>{{image.link}}</a></br>
-            <a href={{image.link}} download={{$index}}>Download Image</a>
           </div>
         </li>
       </ul>

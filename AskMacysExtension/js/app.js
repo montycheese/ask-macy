@@ -2,7 +2,8 @@ angular.module("myApp", [])
   //main controller
   .controller("myController", function($scope) {
     $scope.links = {array: {}};
-    $scope.macyLinks = {array: {}};
+    $scope.macyLinks = {array: {'pageUrl': 'http://slimages.macysassets.com/is/image/MCY/products/6/optimized/3287376_fpx.tif?bgc=255,255,255&wid=224&qlt=90,0&layer=comp&op_sharpen=0&resMode=bicub&op_usm=0.7,1.0,0.5,0&fmt=jpeg',
+        'imgUrl': 'http://www.savethefrogs.com/amphibians/images/south-america/Hypsiboas-cinerascens-8a.jpg'}};
     $scope.searchTerms = [
             'dress',
             'shirt',
@@ -82,13 +83,13 @@ angular.module("myApp", [])
         $scope.$apply(function () {
             $scope.links.array = info;
             chrome.browserAction.setBadgeText({text: "10+"});
-            while ($scope.links.array.length > 0) {
+            /*while ($scope.links.array.length > 0) {
                 var clarifaiResults = verifyImage();
                 if (clarifaiResults) {
                     var url = createSearchUrl(clarifaiResults);
                     $scope.macyLinks.array.push(generateSearch(url));
                 }
-            }
+            }*/
         });
     }
 
@@ -138,7 +139,6 @@ angular.module("myApp", [])
         else{
             return false;
         }
-
         //return object of associations or false
     }
 
@@ -160,8 +160,6 @@ angular.module("myApp", [])
             return null;
         }
 
-
-
         function createSearchUrl(clarifaiResults){
             var url = 'http://www1.macys.com/shop/search?keyword=';
             url += clarifaiResults['searchTerm'];
@@ -181,7 +179,7 @@ angular.module("myApp", [])
         function generateSearch(searchURL){
           //searchURL = "http://www1.macys.com/shop/search?keyword=black+dress";
             return {'pageUrl': 'http://slimages.macysassets.com/is/image/MCY/products/6/optimized/3287376_fpx.tif?bgc=255,255,255&wid=224&qlt=90,0&layer=comp&op_sharpen=0&resMode=bicub&op_usm=0.7,1.0,0.5,0&fmt=jpeg',
-                'imgUrl': 'http://www1.macys.com/shop/product/shop-the-trend-the-perfect-pump?ID=2767978&CategoryID=26481#fn=sp%3D1%26spc%3D828%26ruleId%3D65%26slotId%3D1%26kws%3Dblue%20shoes%20women'};
+                'imgUrl': 'http://www.savethefrogs.com/amphibians/images/south-america/Hypsiboas-cinerascens-8a.jpg'};
           /*$.ajax({
             url: searchURL,
             complete: function(data) {
