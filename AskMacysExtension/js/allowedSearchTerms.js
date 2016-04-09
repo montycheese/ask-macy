@@ -59,3 +59,6 @@ var adjectives = array('leather', 'classic', 'suede', 'casual', 'summer', 'busin
 var colors = array('red', 'green', 'blue', 'black', 'white', 'yellow','purple', 'gray', 'orange', 'khaki', 'beige');
 
 var genders = array('men', 'women', 'man', 'woman', 'unisex');
+
+var genders = array('men', 'women', 'man', 'woman');
+
