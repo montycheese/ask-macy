@@ -24,19 +24,7 @@ angular.module("myApp", [])
       $scope.$apply(function(){
         $scope.links.array = info;
       });
-      document.getElementById("header").innerHTML = "URLs of the images on this webpage:";
+      document.getElementById("header").innerHTML = "Suggested Macy's clothing items:";
       document.getElementsByClassName("buttonDiv")[0].style.visibility="visible";
     }
-
-    //download all the images listed upon button click
-    function downloadImages(){
-      var a = $scope.links.array;
-      for(var i = 0; i < a.length; i++){
-        var link = document.createElement('a');
-        link.href = a[i].link;
-        link.download = function(i){return i + '.' + a[i].link.split('.').pop();}(i);
-        link.click();
-      }
-    }
-    document.getElementById("downloadButton").addEventListener("click", downloadImages);
   });

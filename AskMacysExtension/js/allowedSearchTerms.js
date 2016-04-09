@@ -14,6 +14,6 @@ var allowedWords = array(
 
 var adjectives = array('leather', 'classic', 'suede');
 
-var colors = array('red', 'green', 'blue', 'black', 'white', 'yellow','purple', 'gray', );
+var colors = array('red', 'green', 'blue', 'black', 'white', 'yellow','purple', 'gray');
 
 var genders = array('men', 'women', 'man', 'woman');
