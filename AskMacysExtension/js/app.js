@@ -79,7 +79,6 @@ angular.module("myApp", [])
         $scope.links.array = info;
         chrome.browserAction.setBadgeText({text: "10+"});
       });
-<<<<<<< Updated upstream
 
         function verifyImage(){
 
@@ -126,9 +125,6 @@ angular.module("myApp", [])
         }
       document.getElementById("header").innerHTML = "Suggested Macy's clothing items:";
       document.getElementsByClassName("buttonDiv")[0].style.visibility="visible";
-=======
-      document.getElementById("header").innerHTML = "Suggested Macy's Clothing Items:";
->>>>>>> Stashed changes
     }
 
   });
