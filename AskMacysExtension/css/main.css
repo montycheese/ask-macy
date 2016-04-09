@@ -21,3 +21,12 @@ hr {
 h4 {
   text-align: center;
 }
+
+.imageContainer {
+    float: left;
+    padding-left: 20px;
+}
+
+#imageLink{
+  word-wrap: break-word;
+}
