@@ -1,7 +1,7 @@
 /**
  * Created by montanawong on 4/9/16.
  */
-
+/*
 var searchTerms = array(
     'dress',
     'shirt',
@@ -59,5 +59,4 @@ var adjectives = array('leather', 'classic', 'suede', 'casual', 'summer', 'busin
 var colors = array('red', 'green', 'blue', 'black', 'white', 'yellow','purple', 'gray', 'orange', 'khaki', 'beige');
 
 var genders = array('men', 'women', 'man', 'woman', 'unisex');
-
-
+*/

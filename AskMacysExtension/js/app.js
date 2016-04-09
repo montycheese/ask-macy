@@ -81,6 +81,7 @@ angular.module("myApp", [])
       $scope.$apply(function(){
         $scope.links.array = info;
         chrome.browserAction.setBadgeText({text: "10+"});
+        generateSearch("lol");
       });
 
         function verifyImage(){
@@ -154,7 +155,16 @@ angular.module("myApp", [])
 
         function generateSearch(){
 
+        function generateSearch(searchURL){
+          searchURL = "http://www1.macys.com/shop/search?keyword=black+dress";
+          $.ajax({
+            url: searchURL,
+            complete: function(data) {
+              //console.log(data.responseText);
+              //console.log($(data.responseText).find(".thumbnailImage").text())
+            }
+          });
         }
-      document.getElementById("header").innerHTML = "Suggested Macy's clothing items:";
+      document.getElementById("header").innerHTML = "Suggested Macy's Clothing Items For You:";
     }
   });
