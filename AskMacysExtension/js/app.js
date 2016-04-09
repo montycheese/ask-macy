@@ -2,7 +2,7 @@ angular.module("myApp", [])
   //main controller
   .controller("myController", function($scope) {
     $scope.links = {array: {}};
-    $scope.macyLinks = {array: {}};
+    $scope.macyLinks = {array: []};
     $scope.searchTerms = [
             'dress',
             'shirt',
@@ -75,11 +75,9 @@ angular.module("myApp", [])
             //from the receiving end (content script)
             setImagesURLs);
       });
-      var imageSources = [];
-      imageSources.push({pageUrl:"http://www1.macys.com/shop/product/shop-the-trend-the-perfect-pump?ID=2767978&CategoryID=26481", link: "http://i.imgur.com/5ieOK02.jpg"});
-      $scope.macyLinks.array = imageSources;
-      console.log($scope.macyLinks);
-      console.log($scope.links);
+      //var imageSources = [];
+      //imageSources.push({pageUrl:"http://www1.macys.com/shop/product/shop-the-trend-the-perfect-pump?ID=2767978&CategoryID=26481", link: "http://i.imgur.com/5ieOK02.jpg"});
+      $scope.macyLinks.array.push({pageUrl:"http://www1.macys.com/shop/product/shop-the-trend-the-perfect-pump?ID=2767978&CategoryID=26481", link: "http://i.imgur.com/5ieOK02.jpg"});
     });
 
     // Update links
