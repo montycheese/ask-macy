@@ -77,7 +77,7 @@ angular.module("myApp", [])
       });
       //var imageSources = [];
       //imageSources.push({pageUrl:"http://www1.macys.com/shop/product/shop-the-trend-the-perfect-pump?ID=2767978&CategoryID=26481", link: "http://i.imgur.com/5ieOK02.jpg"});
-      $scope.macyLinks.array.push({pageUrl:"http://www1.macys.com/shop/product/shop-the-trend-the-perfect-pump?ID=2767978&CategoryID=26481", link: "http://i.imgur.com/5ieOK02.jpg"});
+      //$scope.macyLinks.array.push({pageUrl:"http://www1.macys.com/shop/product/shop-the-trend-the-perfect-pump?ID=2767978&CategoryID=26481", link: "http://i.imgur.com/5ieOK02.jpg"});
     });
 
     // Update links
@@ -85,13 +85,13 @@ angular.module("myApp", [])
         $scope.$apply(function () {
             $scope.links.array = info;
             chrome.browserAction.setBadgeText({text: "10+"});
-            /*while ($scope.links.array.length > 0) {
+            while ($scope.links.array.length > 0) {
                 var clarifaiResults = verifyImage();
                 if (clarifaiResults) {
                     var url = createSearchUrl(clarifaiResults);
                     $scope.macyLinks.array.push(generateSearch(url));
                 }
-            }*/
+            }
         });
     }
 
@@ -180,8 +180,8 @@ angular.module("myApp", [])
 
         function generateSearch(searchURL){
           //searchURL = "http://www1.macys.com/shop/search?keyword=black+dress";
-            return {'pageUrl': 'http://slimages.macysassets.com/is/image/MCY/products/6/optimized/3287376_fpx.tif?bgc=255,255,255&wid=224&qlt=90,0&layer=comp&op_sharpen=0&resMode=bicub&op_usm=0.7,1.0,0.5,0&fmt=jpeg',
-                'imgUrl': 'http://www.savethefrogs.com/amphibians/images/south-america/Hypsiboas-cinerascens-8a.jpg'};
+            return {pageUrl: 'http://slimages.macysassets.com/is/image/MCY/products/6/optimized/3287376_fpx.tif?bgc=255,255,255&wid=224&qlt=90,0&layer=comp&op_sharpen=0&resMode=bicub&op_usm=0.7,1.0,0.5,0&fmt=jpeg',
+                link: 'http://www.savethefrogs.com/amphibians/images/south-america/Hypsiboas-cinerascens-8a.jpg'};
           /*$.ajax({
             url: searchURL,
             complete: function(data) {
