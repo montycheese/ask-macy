@@ -89,27 +89,38 @@ angular.module("myApp", [])
                 var clarifaiResults = verifyImage();
                 if (clarifaiResults) {
                     var url = createSearchUrl(clarifaiResults);
+                    console.log(url);
                     $scope.macyLinks.array.push(generateSearch(url));
+                }
+                else{
+                  console.log('not macys prodct');
                 }
             }
         });
     }
+    function checkURL(url) {
+    return(url.match(/\.(jpeg|jpg|gif|png)$/) != null);
+  }
 
     function verifyImage(){
         //get first element of queue.
-        var url = $scope.links.array.shift();
-
+        var url = $scope.links.array.shift().link;
+        if(!checkURL(url)){
+          return false;
+        }
+        //console.log(url);
         var request = new XMLHttpRequest();
         request.open('GET', $scope.endpointTag + url, false);
         request.setRequestHeader("Authorization", "Bearer " + $scope.CLARIFAI_ACCESS_TOKEN);
+        //window.setTimeout(function(){}, 2000);
         request.send(null);
 
         if (request.status === 200) {
-            //console.log(request.responseText);
+            console.log(request.responseText);
             var response = JSON.parse(request.responseText);
             //array of tag strings
             var tags = response['results'][0]['result']['tag']['classes'];
-
+            //console.log(tags);
             var gender = 'woman'; //temp
             var adjective = null;
             var searchTerm = null;
@@ -130,12 +141,14 @@ angular.module("myApp", [])
                     }
                 }
 
-                if (searchTerm == null) {
-                    return false;
-                }
+
 
             }
+            if (searchTerm == null) {
+                return false;
+            }
 
+            //console.log( {searchTerm: searchTerm, adjective: adjective, color : color});
             return {'searchTerm': searchTerm, 'adjective': adjective, 'color' : color};
         }
         else{
@@ -145,13 +158,14 @@ angular.module("myApp", [])
     }
 
         function getColor(request,  url) {
-            request.open('GET', $scope.endpointColor + url, false);
-            request.setRequestHeader("Authorization", "Bearer " + $scope.CLARIFAI_ACCESS_TOKEN);
-            request.send(null);
-            if (request.status === 200) {
-                //console.log(request.responseText);
-                var response = JSON.parse(request.responseText);
-                var colors = response['results']['colors'];
+          var _request = new XMLHttpRequest();
+            _request.open('GET', $scope.endpointColor + url, false);
+            _request.setRequestHeader("Authorization", "Bearer " + $scope.CLARIFAI_ACCESS_TOKEN);
+            _request.send(null);
+            if (_request.status === 200) {
+                console.log(_request.responseText);
+                var response = JSON.parse(_request.responseText);
+                var colors = response['results'][0]['colors'];
                 for(var i=0;i<colors.length;i++){
                     var color = colors[i]['w3c']['name'].replace(/([a-z](?=[A-Z]))/g, '$1 ').split(' ').pop().toLowerCase();
                     if($scope.colors.indexOf(color) != -1){
@@ -175,13 +189,14 @@ angular.module("myApp", [])
             if(color != null){
                 url += '+' + color;
             }
+            console.log(url);
             return url;
         }
 
         function generateSearch(searchURL){
           //searchURL = "http://www1.macys.com/shop/search?keyword=black+dress";
-            return {pageUrl: 'http://slimages.macysassets.com/is/image/MCY/products/6/optimized/3287376_fpx.tif?bgc=255,255,255&wid=224&qlt=90,0&layer=comp&op_sharpen=0&resMode=bicub&op_usm=0.7,1.0,0.5,0&fmt=jpeg',
-                link: 'http://www.savethefrogs.com/amphibians/images/south-america/Hypsiboas-cinerascens-8a.jpg'};
+            return {pageUrl: searchURL,
+                link: 'http://www.new-daily-fashion.com/wp-content/uploads/2015/07/womens-shoes3.jpg'};
           /*$.ajax({
             url: searchURL,
             complete: function(data) {
