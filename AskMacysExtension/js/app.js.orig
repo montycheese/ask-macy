@@ -106,6 +106,7 @@ angular.module("myApp", [])
 
                 for(var i=0;i < tags.length; i++){
                     var tag = tags[i];
+<<<<<<< Updated upstream
                     //check for search term
                     if(tag in $scope.searchTerms){
                         if(searchTerm == null) {
@@ -124,6 +125,8 @@ angular.module("myApp", [])
                 
                 if(gender == null && adjective == null && color == null && searchTerm == null){
                     return false;
+=======
+>>>>>>> Stashed changes
                 }
 
                 return {'searchTerm': searchTerm, 'adjective': adjective, 'color' : color};
