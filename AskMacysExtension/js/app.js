@@ -79,16 +79,17 @@ angular.module("myApp", [])
 
     // Update links
     function setImagesURLs(info) {
-      $scope.$apply(function(){
-        $scope.links.array = info;
-        chrome.browserAction.setBadgeText({text: "10+"});
-        while($scope.links.array.length > 0){
-          var clarifaiResults = verifyImage();
-          if(!clarifaiResults){
-            var url = createSearchUrl(clarifaiResults);
-          }
-        }
-      });
+        $scope.$apply(function () {
+            $scope.links.array = info;
+            chrome.browserAction.setBadgeText({text: "10+"});
+            while ($scope.links.array.length > 0) {
+                var clarifaiResults = verifyImage();
+                if (!clarifaiResults) {
+                    var url = createSearchUrl(clarifaiResults);
+                }
+            }
+        });
+    }
 
     function verifyImage(){
         //get first element of queue.
@@ -110,27 +111,28 @@ angular.module("myApp", [])
             var searchTerm = null;
             var color = getColor(request, url);
 
-            for(var i=0;i < tags.length; i++){
+            for(var i=0;i < tags.length; i++) {
                 var tag = tags[i].toLowerCase();
                 //check for search term
-                if($scope.searchTerms.indexOf(tag) != -1){
-                    if(searchTerm == null) {
+                if ($scope.searchTerms.indexOf(tag) != -1) {
+                    if (searchTerm == null) {
                         searchTerm = tag;
                     }
                 }
                 //check for adjective
-                if($scope.adjectives.indexOf(tag) != -1){
-                    if(adjective == null){
+                if ($scope.adjectives.indexOf(tag) != -1) {
+                    if (adjective == null) {
                         adjective = tag;
                     }
                 }
 
-                if(searchTerm == null){
+                if (searchTerm == null) {
                     return false;
                 }
 
-            if(adjective == null && searchTerm == null){
-                return false;
+                if (adjective == null && searchTerm == null) {
+                    return false;
+                }
             }
 
             return {'searchTerm': searchTerm, 'adjective': adjective, 'color' : color};
@@ -141,7 +143,7 @@ angular.module("myApp", [])
 
         //return object of associations or false
     }
-}
+
         function getColor(request,  url) {
             request.open('GET', $scope.endpointColor + url, false);
             request.setRequestHeader("Authorization", "Bearer " + $scope.CLARIFAI_ACCESS_TOKEN);
@@ -177,6 +179,7 @@ angular.module("myApp", [])
             }
             return url;
         }
+
         function generateSearch(searchURL){
           searchURL = "http://www1.macys.com/shop/search?keyword=black+dress";
           $.ajax({
@@ -188,5 +191,5 @@ angular.module("myApp", [])
           });
         }
       document.getElementById("header").innerHTML = "Suggested Macy's Clothing Items For You:";
-    }
+
   });
