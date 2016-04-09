@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<!-- ng-csp allows u to run a chrome extension -->
+<html ng-app="myApp" ng-csp="">
+  <head>
+    <title></title>
+    <script src="./js/vendor/angular.js"></script>
+    <script src="./js/vendor/jquery.js"></script>
+    <script src="./js/app.js"></script>
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./css/main.css"/>
+  </head>
+  <body ng-controller="myController">
+    <h4 id="header"> Webpage is still loading... </h4>
+    <div class="buttonDiv">
+      <button id="downloadButton" type="button">Download All Images</button>
+    </div>
+    <div>
+      <ul class="list" ng-repeat="image in links.array">
+        <li>
+          <hr>
+          <div class="listcontent" ng-controller="myController">
+            <img src={{image.link}} height="50" width="50"><br>
+            <a id="imageLink" href={{image.link}} target='_newtab'>{{image.link}}</a></br>
+            <a href={{image.link}} download={{$index}}>Download</a>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>

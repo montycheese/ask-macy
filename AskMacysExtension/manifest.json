@@ -1,0 +1,26 @@
+{
+  "name": "Ask Macy",
+  "description": "A Chrome app that asssists with suggesting products from Macy's website.",
+  "version": "1.0",
+  "permissions": [],
+  "manifest_version": 2,
+  "background":{
+    "scripts": ["js/vendor/angular.js", "js/vendor/jquery.js", "js/background.js"]
+  },
+  "icons": { "16": "icon.png",
+           "48": "icon.png",
+          "128": "icon.png"
+  },
+  "content_scripts": [
+    {
+      "matches": ["http://*/*", "https://*/*"],
+      "js": ["js/getImages.js"]
+    }
+  ],
+  "content_security_policy": "script-src 'self'; object-src 'self'",
+  "browser_action": {
+    "default_icon": "icon.png",
+    "default_popup": "listpopup.html"
+  },
+  "permissions": ["tabs", "<all_urls>", "activeTab"]
+}
