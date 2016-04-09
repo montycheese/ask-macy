@@ -18,17 +18,24 @@
 <h1> Test</h1>
 
 
-
+<div id="thumbnails"><p>asfsadfsdfsaf</p></div>
 </body>
 
 </html>
 
+<script src="../js/vendor/jquery.js"></script>
 <script>
 
     window.onload = function() {
-        console.log(verifyImage());
+        //console.log(verifyImage());
+        console.log($('#thumbnails').html());
+
     }
     ;
+
+
+
+
 
     var adjectives = ['leather', 'classic', 'suede', 'casual', 'summer', 'business', 'fur', 'polo'];
     var _colors = ['red', 'green', 'blue', 'black', 'white', 'yellow','purple', 'gray', 'orange', 'khaki', 'beige'];

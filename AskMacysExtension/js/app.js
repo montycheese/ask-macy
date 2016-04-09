@@ -81,7 +81,6 @@ angular.module("myApp", [])
       $scope.$apply(function(){
         $scope.links.array = info;
         chrome.browserAction.setBadgeText({text: "10+"});
-        generateSearch("lol");
       });
 
         function verifyImage(){
@@ -121,7 +120,7 @@ angular.module("myApp", [])
 
                 }
 
-                if(adjective == null && searchTerm == null){
+                if(searchTerm == null){
                     return false;
                 }
 
@@ -153,8 +152,22 @@ angular.module("myApp", [])
         }
 
 
-        function generateSearch(){
 
+        function createSearchUrl(clarifaiResults){
+            var url = 'http://www1.macys.com/shop/search?keyword=';
+            url += clarifaiResults['searchTerm'];
+
+            var adj = clarifaiResults['adjective'];
+            var color = clarifaiResults['color'];
+
+            if(adj != null){
+                url += '+' + adj;
+            }
+            if(color != null){
+                url += '+' + color;
+            }
+            return url;
+        }
         function generateSearch(searchURL){
           searchURL = "http://www1.macys.com/shop/search?keyword=black+dress";
           $.ajax({
