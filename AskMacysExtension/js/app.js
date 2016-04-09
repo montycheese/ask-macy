@@ -109,7 +109,9 @@ angular.module("myApp", [])
 
                 for(var i=0;i < tags.length; i++){
                     var tag = tags[i];
-                    if(tag in )
+                    if(tag in $scope.searchTerms){
+                        searchTerm = tag;
+                    }
                 }
             }
             else{
