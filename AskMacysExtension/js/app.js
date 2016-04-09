@@ -40,3 +40,4 @@ angular.module("myApp", [])
     }
     document.getElementById("downloadButton").addEventListener("click", downloadImages);
   });
+
