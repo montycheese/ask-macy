@@ -17,9 +17,14 @@
           <hr>
           <div class="listcontent" ng-controller="myController">
             <div class="imageContainer">
-              <img id="sourceImage" src={{image.link}} height="300" width="300"><br>
+              Clothes You're Looking At:
+              <img id="sourceImage" src={{image.oldLink}} height="200" width="200"><br>
+              <a id="imageLink" href={{image.oldLink}} target='_newtab'>{{image.oldLink}}</a>
+              Similar Macy's Product:
+              <img id="newImage" src={{image.link}} height="200" width="200"><br>
               <a id="imageLink" href={{image.pageUrl}} target='_newtab'>{{image.pageUrl}}</a></br>
             </div>
+            <hr>
           </div>
         </li>
       </ul>

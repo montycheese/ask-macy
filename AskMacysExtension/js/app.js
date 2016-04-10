@@ -2,6 +2,7 @@ angular.module("myApp", [])
   //main controller
   .controller("myController", function($scope) {
     $scope.links = {array: {}};
+    $scope.oldLinks = {array:{}};
     $scope.macyLinks = {array: []};
     $scope.searchTerms = [
             'dress',
@@ -99,12 +100,13 @@ angular.module("myApp", [])
         });
     }
     function checkURL(url) {
-    return(url.match(/\.(jpeg|jpg|gif|png)$/) != null);
+    return(url.match(/\.(jpeg|jpg|png)$/) != null);
   }
 
     function verifyImage(){
         //get first element of queue.
-        var url = $scope.links.array.shift().link;
+        var urlOld = $scope.links.array.shift()//.link;
+        var url = urlOld.link;
         if(!checkURL(url)){
           return false;
         }
@@ -124,9 +126,17 @@ angular.module("myApp", [])
             var gender = 'woman'; //temp
             var adjective = null;
             var searchTerm = null;
-            var color = getColor(request, url);
-
+            var color = null;
+            try{
+              color = getColor(request, url);
+            }
+            catch(err){
+            }
             for(var i=0;i < tags.length; i++) {
+              //console.log(tags[i]);
+              if(!(typeof tags[i] === 'string' || tags[i] instanceof String)){
+                continue;
+              }
                 var tag = tags[i].toLowerCase();
                 //check for search term
                 if ($scope.searchTerms.indexOf(tag) != -1) {
@@ -140,16 +150,13 @@ angular.module("myApp", [])
                         adjective = tag;
                     }
                 }
-
-
-
             }
             if (searchTerm == null) {
                 return false;
             }
 
             //console.log( {searchTerm: searchTerm, adjective: adjective, color : color});
-            return {'searchTerm': searchTerm, 'adjective': adjective, 'color' : color};
+            return {'searchTerm': searchTerm, 'adjective': adjective, 'color' : color, 'urlOld': urlOld};
         }
         else{
             return false;
@@ -190,13 +197,14 @@ angular.module("myApp", [])
                 url += '+' + color;
             }
             console.log(url);
-            return url;
+            return [url, clarifaiResults['urlOld']];
         }
 
         function generateSearch(searchURL){
           //searchURL = "http://www1.macys.com/shop/search?keyword=black+dress";
-            return {pageUrl: searchURL,
-                link: 'http://www.new-daily-fashion.com/wp-content/uploads/2015/07/womens-shoes3.jpg'};
+            return {pageUrl: searchURL[0],
+                link: 'http://www.new-daily-fashion.com/wp-content/uploads/2015/07/womens-shoes3.jpg',
+              oldLink:searchURL[1].link};
           /*$.ajax({
             url: searchURL,
             complete: function(data) {
