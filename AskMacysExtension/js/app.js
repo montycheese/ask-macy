@@ -56,7 +56,7 @@ angular.module("myApp", [])
             'sunhat'
         ];
         $scope.adjectives = ['leather', 'classic', 'suede', 'casual', 'summer', 'business', 'fur', 'polo'];
-        $scope.colors = ['red', 'green', 'blue', 'black', 'white', 'yellow','purple', 'gray', 'orange', 'khaki', 'beige'];
+        $scope.colors = ['red', 'green', 'blue', 'black', 'white', 'yellow','purple', 'gray', 'orange', 'khaki', 'beige', 'pink'];
         $scope.genders = ['men', 'women', 'man', 'woman', 'unisex'];
         $scope.endpointTag = 'https://api.clarifai.com/v1/tag/?url=';
         $scope.endpointColor = 'https://api.clarifai.com/v1/color/?url=';
